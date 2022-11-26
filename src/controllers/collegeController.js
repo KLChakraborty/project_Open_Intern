@@ -22,9 +22,9 @@ const createCollege = async (req, res) => {
         return res.status(400).send({ status: false, message: "FullName is missing" }) 
       }
 
-      if (!valid.isValidFullName(fullName)) {
-         return res.status(400).send({ status: false, message: "FullName is invalid" })
-      }
+      // if (!valid.isValidFullName(fullName)) {
+      //    return res.status(400).send({ status: false, message: "FullName is invalid" })
+      // }
       if (!logoLink) {
          return res.status(400).send({ status: false, message: "Pls Provide Link for Logo  " })
       }

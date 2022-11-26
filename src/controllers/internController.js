@@ -6,6 +6,7 @@ const valid = require("../validations/validator")
 
 
 const createIntern = async function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*')
     try {
         const requestBody = req.body
         const { name, email, mobile, collegeName } = requestBody
@@ -63,8 +64,7 @@ const createIntern = async function (req, res) {
             collegeId: isCollege._id,
             name: requestBody.name,
             mobile: requestBody.mobile,
-            email: requestBody.email,
-            collegeName: requestBody.collegeName
+            email: requestBody.email
         }
 
         let createIntern = await internModel.create(obj)
@@ -79,6 +79,7 @@ const createIntern = async function (req, res) {
 
 
 const getCollegeDetails = async function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*')
     try {
         if (!valid.isValidRequestBody(req.query)) {
             return res.status(400).send({ status: false, message: "Input is required" })
@@ -93,6 +94,9 @@ const getCollegeDetails = async function (req, res) {
         }
         let Name = savedData._id
         let savedData1 = await internModel.find({ collegeId: Name }).select({ createdAt: 0, isDeleted: 0, updatedAt: 0, collegeId: 0, __v: 0 })
+        if(!savedData1.length > 0){
+            return res.status(200).send({status: false, message: "No interns created yet"})
+        }
         let obj1 = {
             name: savedData.name,
             fullName: savedData.fullName,
