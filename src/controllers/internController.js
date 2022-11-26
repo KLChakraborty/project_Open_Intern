@@ -94,9 +94,6 @@ const getCollegeDetails = async function (req, res) {
         }
         let Name = savedData._id
         let savedData1 = await internModel.find({ collegeId: Name }).select({ createdAt: 0, isDeleted: 0, updatedAt: 0, collegeId: 0, __v: 0 })
-        if(!savedData1.length > 0){
-            return res.status(200).send({status: false, message: "No interns created yet"})
-        }
         let obj1 = {
             name: savedData.name,
             fullName: savedData.fullName,
